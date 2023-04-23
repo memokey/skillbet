@@ -1,25 +1,24 @@
-import React, { useContext } from "react";
-import { 
-  WalletConnectButton, 
-  SeiWalletContext, 
-  useWallet
-} from "@sei-js/react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout";
 import ExploreBanner from "../../components/Explore/ExploreBanner";
+import Tetris from '../../components/Tetris';
+import StartPage from "../../components/Tetris/StartPage";
 
 const Home = () => {
-  const { 
-    supportedWallets, 
-    connect, 
-    disconnect, 
-    installedWallets 
-  } = useContext(SeiWalletContext);
-  const { connectedWallet, offlineSigner, accounts } = useWallet();
+  const navigate = useNavigate();
+
   return (
     <Layout
-      banner={<ExploreBanner />}
+      banner={<></>}
     >
-      <div></div>
+      <div className="bg-[#131314]">
+        <ExploreBanner />
+        <StartPage 
+          startClick={() => {
+            navigate('/tetris');
+          }}
+        />
+      </div>
     </Layout>
   );
 }
