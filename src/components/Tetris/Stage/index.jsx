@@ -10,12 +10,13 @@ import Color from "color";
 
 const Game = styled.div`
 	width: 100vw;
-	height: ${props => (props.portrait ? "95" : "100")}vh;
+	margin-top: 92px;
+	height: ${props => (props.portrait ? "95vh" : "calc(90vh)")};
 	display: flex;
 	flex-direction: ${props => (props.portrait ? "column" : "row")};
 	justify-content: center;
 	align-items: center;
-	background-image: url(/images/tetris/background.js);
+	background-image: url(/images/tetris/background.jpg);
 	background-size: cover;
 	background-position: center;
 `;

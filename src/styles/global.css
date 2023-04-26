@@ -2,3 +2,32 @@
   margin: 0;
   padding: 0;
 }
+
+* {
+  outline-width: 0;
+  outline-color: var(--focus-color);
+  -webkit-outline-width: 0;
+  -webkit-outline-color: var(--focus-color);
+  -moz-outline-width: 0;
+  -moz-outline-color: var(--focus-color);
+}
+
+.linearGradient {
+  background: linear-gradient(180deg, rgba(20, 61, 46, 0) 0%, #000905 71.35%);
+}
+
+*:focus {
+  outline: none;
+  -webkit-outline: none;
+  -moz-outline: none;
+}
+
+body {
+  overflow-y: auto;
+}
+
+@media (max-width: 900px) {
+  body {
+      overflow-y: auto;
+  }
+}

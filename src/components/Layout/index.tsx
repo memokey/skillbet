@@ -5,8 +5,8 @@ const Layout = (props: {
   banner: any;
 }) => {
   return (
-    <div className="bg-globalBgColor flex sm:flex-row xs:flex-col w-full relative">
-      <div className="bg-globalBgColor flex w-full h-full">
+    <div className="bg-[#131314] flex sm:flex-row xs:flex-col w-full relative">
+      <div className="flex w-full h-full">
         <div
           className={`fixed left-[0px] xs:top-[80px] sm:top-[164px] xl:top-[92px] bottom-0 overflow-y-auto right-0`}
         >
