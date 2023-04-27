@@ -5,6 +5,7 @@ import Switch from "react-switch";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
 import StatusRow from "../StatusRow";
 import LoseGame from '../LoseGame';
+import PrimaryButton from '../../Common/Buttons/PrimaryButton'
 
 import Color from "color";
 
@@ -167,13 +168,27 @@ const getRenderizacaoBloco = bloco => {
 	return trimBloco;
 };
 
-const Stage = ({ lose, restartClick, map, player, hint, status, paused, ...others }) => {
+const Stage = ({ lose, setLose, restartClick, map, player, hint, status, paused, ...others }) => {
 	const [pixelSize, setPixelSize] = useState(30);
 	const [portrait, setPortrait] = useState(false);
 	const { width, height } = useWindowDimensions();
 	const [theme3d, setTheme3d] = useState(false);
 	const [nextRender, setNextRender] = useState();
 	const stageRef = useRef(null);
+	const [time, setTime] = useState(120);
+	const [clearIn, setClearIn] = useState(null);
+
+	useEffect(() => {
+		if(!clearIn) {
+			const clear = setInterval(() => {
+				setTime(value => value - 1)
+			}, 1000)
+			setClearIn(clear);
+		} else if (time == 0) {
+			setLose(true);
+			clearInterval(clearIn);
+		}
+	}, [time])
 
 	useEffect(() => {
 		let pixelSizeHeight = height / 20;
@@ -262,6 +277,9 @@ const Stage = ({ lose, restartClick, map, player, hint, status, paused, ...other
 								}
 							/>
 						</ContainerSwitch>
+						<div className="absolute top-[310px] left-[22.7vw] bg-black text-white font-bold px-10 py-5 border-white border-4">
+							{`${Math.floor(time / 60)} : ${time % 60}`}
+						</div>
 					</ContainerNext>
 				)}
 				{map && (
@@ -290,7 +308,7 @@ const Stage = ({ lose, restartClick, map, player, hint, status, paused, ...other
 											stage="true"
 											key={`pixel-${x}`}
 											fill={pixel.fill || playerFill}
-											color={playerFill ? player.bloco.color : pixel.color}
+											color={playerFill ? player.bloco.color : "#e54b4b"}
 											playerColor={player.bloco.color}
 											topBloco={topBloco}
 											zIndex={zIndex}
@@ -333,6 +351,15 @@ const Stage = ({ lose, restartClick, map, player, hint, status, paused, ...other
 					</ContainerStatus>
 				)}
 			</Game>
+			<div className="absolute bottom-5 right-5">
+				<PrimaryButton
+					caption={"Finish a Game"}
+					onClick={() => {
+						setLose(true);
+					}}
+					styles="!px-[30px]"
+				/>
+			</div>
 			{ lose && 
 				<LoseGame portrait={portrait} restartClick={restartClick} status={status} pixelSize={pixelSize} theme3d={theme3d}>
 				</LoseGame>}

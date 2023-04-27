@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 const CenterOverlay = styled.div`
 	position: fixed;
@@ -19,11 +20,11 @@ const CenterOverlay = styled.div`
 const LoseContainer = styled.div`
 	transition: all 0.2s;
 	width: ${props => props.pixelSize * (props.portrait ? 12 : 20)}px;
-	height: ${props => props.pixelSize * (props.portrait ? 20 : 10)}px;
+	height: ${props => props.pixelSize * (props.portrait ? 20 : 15)}px;
 	border: ${props => props.pixelSize / 10}px solid white;
 	background-color: ${props => props.theme3d ? '#444' : '#000'};
 	font-size: ${props => props.pixelSize}px;
-	font-family: "ZCOOL QingKe HuangYou", cursive;
+	font-family: Outfit;
 	color: white;
 	display: flex;
 	flex-flow: column;
@@ -62,7 +63,7 @@ const Button = styled.button`
 	width: ${props => props.pixelSize * 10}px;
 	height: ${props => props.pixelSize * 2}px;
 	font-size: ${props => props.pixelSize / 1.5}px;
-	font-family: "ZCOOL QingKe HuangYou", cursive;
+	font-family: Outfit;
 	color: white;
 	border: ${props => props.pixelSize / 20}px solid white;
 	border-radius: ${props => props.pixelSize / 10}px;
@@ -77,20 +78,29 @@ const Button = styled.button`
 
 `;
 
-const LoseGame = ({status, portrait, pixelSize, theme3d, restartClick}) => (
-	<CenterOverlay>
-		<LoseContainer portrait={portrait} pixelSize={pixelSize} theme3d={theme3d}>
-			<Title portrait={portrait}>Game Over</Title>
-			<ContainerStatus>
-				<StatusRow>SCORE: {status.score}</StatusRow>
-				<StatusRow>LEVEL: {status.level}</StatusRow>
-				<StatusRow>LINES: {status.lines}</StatusRow>
-			</ContainerStatus>
-			<ContainerButton portrait={portrait}>
-				<Button pixelSize={pixelSize} onClick={() => restartClick()}>Restart</Button>
-			</ContainerButton>
-		</LoseContainer>
-	</CenterOverlay>
-);
+const LoseGame = ({status, portrait, pixelSize, theme3d, restartClick}) => {
+  const navigate = useNavigate();
+
+	const quitGame = () => {
+		navigate('/')
+	}
+
+	return (
+		<CenterOverlay>
+			<LoseContainer portrait={portrait} pixelSize={pixelSize} theme3d={theme3d}>
+				<Title portrait={portrait}>Game Over</Title>
+				<ContainerStatus>
+					<StatusRow>SCORE: {status.score}</StatusRow>
+					<StatusRow>LEVEL: {status.level}</StatusRow>
+					<StatusRow>LINES: {status.lines}</StatusRow>
+				</ContainerStatus>
+				<ContainerButton portrait={portrait}>
+					<Button pixelSize={pixelSize} onClick={quitGame}>Quit</Button>
+				</ContainerButton>
+			</LoseContainer>
+		</CenterOverlay>
+	);
+}
+
 
 export default LoseGame;

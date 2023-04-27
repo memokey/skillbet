@@ -10,7 +10,7 @@ const StyledStartPage = styled.div`
 
 const StartButton = styled.button`
 	font-size: 2.2em;
-	font-family: "ZCOOL QingKe HuangYou", cursive;
+	font-family: Outfit;
 	/* border: 2px solid #222; */
 	border: none;
 	padding: 30px 100px;

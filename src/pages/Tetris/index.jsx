@@ -359,6 +359,7 @@ const Tetris = () => {
 	return (
 		<Stage
 			lose={gameOver}
+			setLose={setGameOver}
 			restartClick={() => restartGame()}
 			map={map}
 			player={player}
