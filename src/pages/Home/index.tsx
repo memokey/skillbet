@@ -8,6 +8,8 @@ import Input from "../../components/Common/Forms/Input";
 import { useEffect, useState } from "react";
 import ACTIONS from '../../config/actions';
 import { setLeaderboard } from "../../redux/slices/tetrisSlice";
+import LeaderBoard from "../../components/Home/LeaderBoard";
+import { apiCaller } from "../../utils/fetcher";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -18,6 +20,15 @@ const Home = () => {
   useEffect(() => {
     localStorage.setItem('betAmount', betAmount);
   }, [betAmount])
+
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      var result = await apiCaller.get('tetrises/fetchLeaderboard');
+      dispatch(setLeaderboard({result: result.data.data}))
+    }
+    fetchLeaderboard()
+    initSocket()
+  }, [])
 
   const initSocket = () => {
     // This part is main for socket.
@@ -58,17 +69,21 @@ const Home = () => {
             setModalOpen(false);
           }}
           onConfirm={() => {
-            initSocket();
             (window as any).socket.emit('get-leaderboard', {});
             navigate('/tetris');
           }}
         />
-        <SmallButton 
-          caption="Start a Game"
-          onClick={() => {
-            setModalOpen(true);
-          }}
-        />
+        <div className="p-10">
+          <div className="flex justify-end">
+            <SmallButton 
+              caption="Start a Game"
+              onClick={() => {
+                setModalOpen(true);
+              }}
+            />
+          </div>
+          <LeaderBoard />
+        </div>
       </div>
     </Layout>
   );

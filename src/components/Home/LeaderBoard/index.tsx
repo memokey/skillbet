@@ -7,7 +7,7 @@ const LeaderBoard = () => {
     winners: state.tetris.winners
   }))
   return (
-    <div className="w-[15vw] grid grid-row">
+    <div className="grid grid-row">
       {winners.map((winner, index) => (
         <div 
           key={index}

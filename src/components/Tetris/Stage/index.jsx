@@ -268,7 +268,7 @@ const Stage = ({ lose, setLose, restartClick, map, player, hint, status, time, p
 							{`${Math.floor(time / 60)} : ${time % 60}`}
 						</div>
 						<div className="display-flex h-[300px] mt-10 overflow-x-hidden overflow-y-auto w-full">
-							<h2 className="text-white text-[30px] w-full">Leaderboard</h2>
+							<h2 className="text-white text-[30px] w-full w-[13vw]">Leaderboard</h2>
 							<LeaderBoard />
 						</div>
 					</ContainerNext>
