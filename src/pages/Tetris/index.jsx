@@ -147,6 +147,7 @@ const Tetris = () => {
 
 	useEffect(() => {
 		if(gameOver && accounts.length != 0) {
+			console.log(window.socket);
 			if(window.socket) {
 				window.socket.emit(ACTIONS.GET_RESULT_TETRIS, {
 					walletAddress: accounts[0].address,

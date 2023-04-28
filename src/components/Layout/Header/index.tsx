@@ -38,6 +38,7 @@ const Header = () => {
 
     if (!(window as any).listen) {
       (window as any).socket.on('send-leaderboard', (data) => {
+        console.log('winners', data);
         dispatch(setLeaderboard(data))
       });
       (window as any).listen = true
