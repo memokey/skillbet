@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useDispatch } from 'react-redux'
 import LogoComp from "../LogoComp";
 import { HeaderMenuTitles } from "../../../data";
 import HeaderMenuItem from "./HeaderMenuItem";
@@ -8,8 +7,6 @@ import {
   SeiWalletContext, 
   useWallet
 } from "@sei-js/react";
-import ACTIONS from '../../../config/actions';
-import { setLeaderboard } from "../../../redux/slices/tetrisSlice";
 
 const Header = () => {
   const { 
@@ -19,31 +16,6 @@ const Header = () => {
     installedWallets 
   } = useContext(SeiWalletContext);
   const { connectedWallet, offlineSigner, accounts } = useWallet();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if(accounts.length != 0) {
-      initSocket();
-    }
-  }, [accounts])
-
-  const initSocket = () => {
-    // This part is main for socket.
-    if (!(window as any).socket) {
-        setTimeout(() => {
-          initSocket()
-        }, 10)
-        return
-    }
-
-    if (!(window as any).listen) {
-      (window as any).socket.on('send-leaderboard', (data) => {
-        console.log('winners', data);
-        dispatch(setLeaderboard(data))
-      });
-      (window as any).listen = true
-    }
-  }
 
   const [active, setActive] = useState(0);
   return (
