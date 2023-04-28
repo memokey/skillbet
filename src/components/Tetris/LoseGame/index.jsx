@@ -95,6 +95,7 @@ const LoseGame = ({status, portrait, pixelSize, theme3d, restartClick}) => {
 					<StatusRow>LINES: {status.lines}</StatusRow>
 				</ContainerStatus>
 				<ContainerButton portrait={portrait}>
+					<Button pixelSize={pixelSize} onClick={restartClick}>Restart</Button>
 					<Button pixelSize={pixelSize} onClick={quitGame}>Quit</Button>
 				</ContainerButton>
 			</LoseContainer>

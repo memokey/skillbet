@@ -169,27 +169,13 @@ const getRenderizacaoBloco = bloco => {
 	return trimBloco;
 };
 
-const Stage = ({ lose, setLose, restartClick, map, player, hint, status, paused, ...others }) => {
+const Stage = ({ lose, setLose, restartClick, map, player, hint, status, time, paused, ...others }) => {
 	const [pixelSize, setPixelSize] = useState(30);
 	const [portrait, setPortrait] = useState(false);
 	const { width, height } = useWindowDimensions();
 	const [theme3d, setTheme3d] = useState(false);
 	const [nextRender, setNextRender] = useState();
 	const stageRef = useRef(null);
-	const [time, setTime] = useState(120);
-	const [clearIn, setClearIn] = useState(null);
-
-	useEffect(() => {
-		if(!clearIn) {
-			const clear = setInterval(() => {
-				setTime(value => value - 1)
-			}, 1000)
-			setClearIn(clear);
-		} else if (time == 0) {
-			setLose(true);
-			clearInterval(clearIn);
-		}
-	}, [time])
 
 	useEffect(() => {
 		let pixelSizeHeight = height / 20;

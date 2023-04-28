@@ -121,6 +121,20 @@ const Tetris = () => {
 	const [dragX, setDragX] = useState(0);
 	const [dragY, setDragY] = useState(0);
 	const [gameOver, setGameOver] = useState(false);
+	const [time, setTime] = useState(120);
+	const [clearIn, setClearIn] = useState(null);
+
+	useEffect(() => {
+		if(!clearIn) {
+			const clear = setInterval(() => {
+				setTime(value => value - 1)
+			}, 1000)
+			setClearIn(clear);
+		} else if (time == 0) {
+			setLose(true);
+			clearInterval(clearIn);
+		}
+	}, [time])
 
 	useEffect(() => {
 		const levelBaseScore = 1000;
@@ -134,6 +148,7 @@ const Tetris = () => {
 	}, [level, score]);
 
 	const restartGame = () => {
+		setTime(120);
 		setMap(initialMap); //TODO: lose game
 		setlines(0);
 		setScore(0);
@@ -146,7 +161,7 @@ const Tetris = () => {
 	};
 
 	useEffect(() => {
-		if(gameOver && accounts.length != 0) {
+		if(gameOver) {
 			if(window.socket) {
 				window.socket.emit(ACTIONS.GET_RESULT_TETRIS, {
 					amount: localStorage.getItem('betAmount'),
@@ -373,6 +388,7 @@ const Tetris = () => {
 		);
 	return (
 		<Stage
+			time={time}
 			lose={gameOver}
 			setLose={setGameOver}
 			restartClick={() => restartGame()}
