@@ -6,6 +6,7 @@ import useWindowDimensions from "../../../hooks/useWindowDimensions";
 import StatusRow from "../StatusRow";
 import LoseGame from '../LoseGame';
 import PrimaryButton from '../../Common/Buttons/PrimaryButton'
+import LeaderBoard from '../../Home/LeaderBoard';
 
 import Color from "color";
 
@@ -279,6 +280,10 @@ const Stage = ({ lose, setLose, restartClick, map, player, hint, status, paused,
 						</ContainerSwitch>
 						<div className="absolute top-[310px] left-[22.7vw] bg-black text-white font-bold px-10 py-5 border-white border-4">
 							{`${Math.floor(time / 60)} : ${time % 60}`}
+						</div>
+						<div className="absolute top-[440px] left-[19.5vw] h-[300px] overflow-auto w-full">
+							<h2 className="text-white text-[30px] w-full">Leaderboard</h2>
+							<LeaderBoard />
 						</div>
 					</ContainerNext>
 				)}

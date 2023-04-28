@@ -4,12 +4,16 @@ import ExploreBanner from "../../components/Explore/ExploreBanner";
 import { SmallButton } from "../../components/Common/Buttons";
 import { GeneralModal } from "../../components/Common/Modals";
 import Input from "../../components/Common/Forms/Input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
   const [betAmount, setBetAmount] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('betAmount', betAmount);
+  }, [betAmount])
 
   return (
     <Layout
@@ -23,7 +27,7 @@ const Home = () => {
           title="Start a new game"
           content={
             <Input
-              caption={"Try to wager"}
+              caption={"Input your name"}
               value={betAmount}
               setValue={setBetAmount}
               disabled={false}

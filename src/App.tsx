@@ -6,8 +6,14 @@ import {
 } from 'react-router-dom';
 import routes from './routes/routes';
 import Header from './components/Layout/Header';
+import { useEffect } from 'react';
+import socket from './utils/socket-client';
 
 function App() {
+
+  useEffect(() => {
+    (window as any).socket = socket();
+  }, [])
   return (
     <div>
       <Header/>

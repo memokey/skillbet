@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDrag } from "react-use-gesture";
 import BarLoader from "react-spinners/BarLoader";
+import { useWallet } from '@sei-js/react';
 
 import Stage from "../../components/Tetris/Stage";
 import { useInterval } from "../../hooks/useInterval";
 import Center from "../../components/Tetris/Center";
 
 import { PrintPlayerInMap } from "../../utils";
+import ACTIONS from "../../config/actions";
 
 //TODO: Alterar OnClick (rotatePlayer) para OnFastClick (criar hook)
 //TODO: Organização do componente "Game" (Separar codigo em hooks, outros components e funcoes)
@@ -105,6 +107,7 @@ const getRandomPlayer = player => {
 };
 
 const Tetris = () => {
+	const { accounts } = useWallet();
 	const [map, setMap] = useState(initialMap);
 	const [player, setPlayer] = useState();
 	const [down, setDown] = useState(false);
@@ -141,6 +144,19 @@ const Tetris = () => {
 	const loseGame = () => {
 		setGameOver(true);
 	};
+
+	useEffect(() => {
+		if(gameOver && accounts.length != 0) {
+			if(window.socket) {
+				window.socket.emit(ACTIONS.GET_RESULT_TETRIS, {
+					walletAddress: accounts[0].address,
+					amount: localStorage.getItem('betAmount'),
+					score,
+					level
+				})
+			}
+		}
+	}, [gameOver])
 
 	const drop = () => {
 		if (!player) {
