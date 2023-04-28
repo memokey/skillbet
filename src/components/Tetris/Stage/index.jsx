@@ -278,10 +278,10 @@ const Stage = ({ lose, setLose, restartClick, map, player, hint, status, paused,
 								}
 							/>
 						</ContainerSwitch>
-						<div className="absolute top-[310px] left-[22.7vw] bg-black text-white font-bold px-10 py-5 border-white border-4">
+						<div className="display mt-5 flex justify-center bg-black text-white font-bold px-10 py-5 border-white border-4">
 							{`${Math.floor(time / 60)} : ${time % 60}`}
 						</div>
-						<div className="absolute top-[440px] left-[19.5vw] h-[300px] overflow-auto w-full">
+						<div className="display-flex h-[300px] mt-10 overflow-x-hidden overflow-y-auto w-full">
 							<h2 className="text-white text-[30px] w-full">Leaderboard</h2>
 							<LeaderBoard />
 						</div>
