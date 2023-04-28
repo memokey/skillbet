@@ -5,6 +5,7 @@ import { SmallButton } from "../../components/Common/Buttons";
 import { GeneralModal } from "../../components/Common/Modals";
 import Input from "../../components/Common/Forms/Input";
 import { useEffect, useState } from "react";
+import ACTIONS from '../../config/actions';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ const Home = () => {
             setModalOpen(false);
           }}
           onConfirm={() => {
+            (window as any).socket.emit('get-leaderboard', {});
             navigate('/tetris');
           }}
         />
