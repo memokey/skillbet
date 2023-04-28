@@ -10,7 +10,7 @@ const socket = () => {
         rejectUnauthorized: false,
     }
     return io(
-        'localhost:3004',
+        'https://solarity-backend.herokuapp.com',
         options
     )
 }
