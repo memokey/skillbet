@@ -131,7 +131,7 @@ const Tetris = () => {
 			}, 1000)
 			setClearIn(clear);
 		} else if (time == 0) {
-			setLose(true);
+			setGameOver(true);
 			clearInterval(clearIn);
 		}
 	}, [time])
