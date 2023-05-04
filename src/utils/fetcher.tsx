@@ -18,7 +18,7 @@ export const fetcher = async (url: string): Promise<any> => {
     return res.json()
 }
 
-const urlBase = 'http://localhost:3004';
+const urlBase = 'https://solarity-backend.herokuapp.com';
 export const apiCaller = axios.create({
     baseURL: `${urlBase}/api`,
     headers: {
