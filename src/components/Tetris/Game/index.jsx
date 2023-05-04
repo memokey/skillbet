@@ -110,6 +110,8 @@ const Game = () => {
 	const [down, setDown] = useState(false);
 	const [pause, setPause] = useState(false);
 	const [tick, setTick] = useState(Date.now());
+	const [tickLeft, setTickLeft] = useState(Date.now());
+	const [tickRight, setTickRight] = useState(Date.now());
 	const [hintPlayer, setHintPlayer] = useState();
 	const [spaceReleased, setSpaceReleased] = useState(true);
 	const [lines, setlines] = useState(0);
