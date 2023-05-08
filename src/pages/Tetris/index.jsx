@@ -142,6 +142,8 @@ const Tetris = () => {
 		39: true,
 		40: true,
 		32: true,
+		88: true,
+		90: true,
 	}
 
 	useEffect(() => {
@@ -156,7 +158,13 @@ const Tetris = () => {
 				setPlayer(player => ({ ...player, pos: getNewPlayerPos("left", player) }));
 				break;
 			case 38:
-				rotatePlayer();
+				rotatePlayer(false);
+				break;
+			case 88:
+				rotatePlayer(false);
+				break;
+			case 90:
+				rotatePlayer(true);
 				break;
 			case 39:
 				setPlayer(player => ({ ...player, pos: getNewPlayerPos("right", player) }));
@@ -291,13 +299,23 @@ const Tetris = () => {
 		});
 	};
 
-	const rotatePlayer = () => {
+	const rotatePlayer = (flag) => {
 		setPlayer(player => {
 			const clonedPlayer = JSON.parse(JSON.stringify(player));
 			let mtrx = clonedPlayer.bloco.bloco.map((_, index) =>
 				clonedPlayer.bloco.bloco.map(column => column[index])
 			);
 			mtrx = mtrx.map(row => row.reverse());
+			if(flag) {
+				mtrx = mtrx.map((_, index) =>
+					mtrx.map(column => column[index])
+				);
+				mtrx = mtrx.map(row => row.reverse());
+				mtrx = mtrx.map((_, index) =>
+					mtrx.map(column => column[index])
+				);
+				mtrx = mtrx.map(row => row.reverse());
+			}
 			if (validatePosition(player.pos, { bloco: mtrx })) {
 				return { ...player, bloco: { ...player.bloco, bloco: mtrx } };
 			} else {
