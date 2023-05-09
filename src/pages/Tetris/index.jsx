@@ -121,7 +121,9 @@ const getRandomPlayer = player => {
 
 const Tetris = () => {
 	const [map, setMap] = useState(initialMap);
+	const mapRef = useRef(map);
 	const [player, setPlayer] = useState();
+	const playerRef = useRef(player);
 	const [down, setDown] = useState(false);
 	const [pause, setPause] = useState(false);
 	const [tick, setTick] = useState(Date.now());
@@ -136,6 +138,7 @@ const Tetris = () => {
 	const [gameOver, setGameOver] = useState(false);
 	const [time, setTime] = useState(120);
 	const [clearIn, setClearIn] = useState(null);
+
 	const keyList = {
 		37: true,
 		38: true,
@@ -150,12 +153,20 @@ const Tetris = () => {
 		hintRef.current = hintPlayer;
 	}, [hintPlayer])
 
+	useEffect(() => {
+		playerRef.current = player;
+	}, [player])
+
+	useEffect(() => {
+		mapRef.current = map;
+	}, [map])
+
 	const keyMap = (keyCode) => {
 		if (pause || gameOver)
 			return;
 		switch(keyCode) {
 			case 37:
-				setPlayer(player => ({ ...player, pos: getNewPlayerPos("left", player) }));
+				setPlayer(player => ({ ...player, pos: getNewPlayerPos("left") }));
 				break;
 			case 38:
 				rotatePlayer(false);
@@ -167,7 +178,7 @@ const Tetris = () => {
 				rotatePlayer(true);
 				break;
 			case 39:
-				setPlayer(player => ({ ...player, pos: getNewPlayerPos("right", player) }));
+				setPlayer(player => ({ ...player, pos: getNewPlayerPos("right") }));
 				break;
 			case 40:
 				setTick(Date.now());
@@ -183,7 +194,7 @@ const Tetris = () => {
 	}
 	
   const initialDelay = 200;
-  const repeatRate = 0;
+  const repeatRate = 10;
 
   useEffect(() => {
     let timeoutId = null;
@@ -284,7 +295,7 @@ const Tetris = () => {
 			return;
 		}
 		setPlayer(player => {
-			const newPos = getNewPlayerPos("down", player);
+			const newPos = getNewPlayerPos("down");
 			if (player.pos === newPos) {
 				setMap(map => {
 					const mapWithPlayer = PrintPlayerInMap(player, map);
@@ -362,13 +373,13 @@ const Tetris = () => {
 			return;
 		switch (keyCode) {
 			case 37:
-				setPlayer(player => ({ ...player, pos: getNewPlayerPos("left", player) }));
+				setPlayer(player => ({ ...player, pos: getNewPlayerPos("left") }));
 				break;
 			case 38:
 				rotatePlayer();
 				break;
 			case 39:
-				setPlayer(player => ({ ...player, pos: getNewPlayerPos("right", player) }));
+				setPlayer(player => ({ ...player, pos: getNewPlayerPos("right") }));
 				break;
 			case 40:
 				setTick(Date.now());
@@ -429,15 +440,15 @@ const Tetris = () => {
 							mapY > STAGE_HEIGHT ||
 							mapX < 0 ||
 							mapX > STAGE_WIDTH ||
-							!map[mapY] ||
-							!map[mapY][mapX] ||
-							map[mapY][mapX].fill === 1
+							!mapRef.current[mapY] ||
+							!mapRef.current[mapY][mapX] ||
+							mapRef.current[mapY][mapX].fill === 1
 						)
 							return false;
 					}
 			return true;
 		},
-		[map]
+		[mapRef]
 	);
 
 	const calculateHintPlayer = React.useCallback(
@@ -452,16 +463,18 @@ const Tetris = () => {
 	);
 
 	const getNewPlayerPos = React.useCallback(
-		(movement, player) => {
+		(movement) => {
 			let newPos;
-			if (!player) return;
-			if (movement === "down") newPos = [player.pos[0] + 1, player.pos[1]];
-			if (movement === "left") newPos = [player.pos[0], player.pos[1] - 1];
-			if (movement === "right") newPos = [player.pos[0], player.pos[1] + 1];
-			if (!validatePosition(newPos, player.bloco)) return player.pos;
+			if (!playerRef.current) return;
+			if (movement === "down") newPos = [playerRef.current.pos[0] + 1, playerRef.current.pos[1]];
+			if (movement === "left") newPos = [playerRef.current.pos[0], playerRef.current.pos[1] - 1];
+			if (movement === "right") newPos = [playerRef.current.pos[0], playerRef.current.pos[1] + 1];
+			if (!validatePosition(newPos, playerRef.current.bloco)) {
+				return playerRef.current.pos;
+			}
 			return newPos;
 		},
-		[player, validatePosition]
+		[playerRef, mapRef, validatePosition]
 	);
 
 	useInterval(
@@ -483,8 +496,8 @@ const Tetris = () => {
 			if (down) {
 				if (Math.abs(mx - dragX) > THRESHOLD) {
 					if (mx - dragX > 0)
-						setPlayer(player => ({ ...player, pos: getNewPlayerPos("right", player) }));
-					else setPlayer(player => ({ ...player, pos: getNewPlayerPos("left", player) }));
+						setPlayer(player => ({ ...player, pos: getNewPlayerPos("right") }));
+					else setPlayer(player => ({ ...player, pos: getNewPlayerPos("left") }));
 					setDragX(mx);
 				}
 				if (Math.abs(my - dragY) > THRESHOLD) {
