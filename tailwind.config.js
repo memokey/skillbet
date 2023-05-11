@@ -6,6 +6,12 @@ export default {
   ],
   theme: {
     extend: {
+      spacing: {
+        '17': '4.166666667%',
+      },
+      gridTemplateColumns: {
+        '17': 'repeat(17, minmax(0, 1fr))',
+      },
       colors: {
         brandblack: "#1F2125",
         transparent: 'transparent',

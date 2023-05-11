@@ -1,4 +1,189 @@
+import { LeaderItemType } from "../components/Betting/LeaderItem";
+import { DetailedLeaderItemType } from "../components/Betting/ListItem";
+import { MenuItemType } from "../components/Common/Menus/GeneralMenu";
 import { SliderType } from "../components/Explore/BannerSlide"
+
+export const SEASON_MENUITEMS: MenuItemType[] = [
+    {
+        title: 'Season1',
+        lockFlag: false,
+    },
+    {
+        title: 'Season2',
+        lockFlag: true,
+    }
+];
+
+export const LEADERBOARD_MENUITEMS: MenuItemType[] = [
+    {
+        title: '3 way',
+        lockFlag: false,
+    },
+    {
+        title: 'Double change',
+        lockFlag: false,
+    },
+    {
+        title: 'Both teams',
+        lockFlag: false,
+    }
+];
+
+export const GAME_MENU_ITEMS: MenuItemType[] = [
+    {
+        title: 'All Matches',
+        lockFlag: false,
+    },
+    {
+        title: 'P2P',
+        lockFlag: false,
+    },
+    {
+        title: 'P2Pool',
+        lockFlag: false,
+    }
+];
+
+export const DETAILED_LEADER_ITEMS: DetailedLeaderItemType[] = [
+    {
+        date: '28 Aug',
+        time: '01:58',
+        walletAddress: 'Monke2',
+        avatarUrl: '/images/betting/bepplee.png',
+        score: 1244,
+        amount: '155Sei',
+        betName: 'Ranked #1414',
+        rank: 10,
+        gameAvatar: '/images/betting/tetris.png',
+        timeAge: '15 seconds ago',
+    },
+    {
+        date: '28 Aug',
+        time: '01:58',
+        walletAddress: 'Monke2',
+        avatarUrl: '/images/betting/bepplee.png',
+        score: 1244,
+        amount: '155Sei',
+        betName: 'Ranked #1414',
+        rank: 10,
+        gameAvatar: '/images/betting/tetris.png',
+        timeAge: '15 seconds ago',
+    },
+    {
+        date: '28 Aug',
+        time: '01:58',
+        walletAddress: 'Monke2',
+        avatarUrl: '/images/betting/bepplee.png',
+        score: 1244,
+        amount: '155Sei',
+        betName: 'Ranked #1414',
+        rank: 10,
+        gameAvatar: '/images/betting/tetris.png',
+        timeAge: '15 seconds ago',
+    },
+    {
+        date: '28 Aug',
+        time: '01:58',
+        walletAddress: 'Monke2',
+        avatarUrl: '/images/betting/bepplee.png',
+        score: 1244,
+        amount: '155Sei',
+        betName: 'Ranked #1414',
+        rank: 10,
+        gameAvatar: '/images/betting/tetris.png',
+        timeAge: '15 seconds ago',
+    },
+    {
+        date: '28 Aug',
+        time: '01:58',
+        walletAddress: 'Monke2',
+        avatarUrl: '/images/betting/bepplee.png',
+        score: 1244,
+        amount: '155Sei',
+        betName: 'Ranked #1414',
+        rank: 10,
+        gameAvatar: '/images/betting/tetris.png',
+        timeAge: '15 seconds ago',
+    },
+    {
+        date: '28 Aug',
+        time: '01:58',
+        walletAddress: 'Monke2',
+        avatarUrl: '/images/betting/bepplee.png',
+        score: 1244,
+        amount: '155Sei',
+        betName: 'Ranked #1414',
+        rank: 10,
+        gameAvatar: '/images/betting/tetris.png',
+        timeAge: '15 seconds ago',
+    },
+    {
+        date: '28 Aug',
+        time: '01:58',
+        walletAddress: 'Monke2',
+        avatarUrl: '/images/betting/bepplee.png',
+        score: 1244,
+        amount: '155Sei',
+        betName: 'Ranked #1414',
+        rank: 10,
+        gameAvatar: '/images/betting/tetris.png',
+        timeAge: '15 seconds ago',
+    },
+];
+
+export const LEADER_ITEMS: LeaderItemType[] = [
+    {
+        avatarUrl: '/images/betting/avatars/avatar1.png',
+        name: 'Gigia',
+        score: 24242,
+        no: 1,
+    },
+    {
+        avatarUrl: '/images/betting/avatars/avatar2.png',
+        name: 'Gigia',
+        score: 12341,
+        no: 2,
+    },
+    {
+        avatarUrl: '/images/betting/avatars/avatar3.png',
+        name: 'Gigia',
+        score: 4141,
+        no: 3,
+    },
+    {
+        avatarUrl: '/images/betting/avatars/general.png',
+        name: 'Gigia',
+        score: 12341,
+        no: 4,
+    },
+    {
+        avatarUrl: '/images/betting/avatars/general.png',
+        name: 'Gigia',
+        score: 4141,
+        no: 5,
+    },
+    {
+        avatarUrl: '/images/betting/avatars/general.png',
+        name: 'Gigia',
+        score: 12341,
+        no: 6,
+    }
+];
+
+export const WEEK_GAMES = [
+    {
+        bgImg: "/images/betting/week/game1.png",
+    },
+    {
+        bgImg: "/images/betting/week/game2.png",
+    },
+    {
+        bgImg: "/images/betting/week/game3.png",
+    },
+    {
+        bgImg: "/images/betting/week/game4.png",
+    },
+];
 
 export const HeaderMenuTitles = [
   {
