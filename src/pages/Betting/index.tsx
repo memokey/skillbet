@@ -24,7 +24,7 @@ const Betting = () => {
               onLeftArrowClick={() => {}}
               onRightArrowClick={() => {}}
           />
-          <BorderPanel style="mt-[60px] p-0 pt-">
+          <BorderPanel style="mt-[60px] p-0">
             <div className="w-full h-[40px] bg-[#272829] rounded-t-[40px]">
               <div className="flex gap-8 text-[14px] pt-[10px] pl-[40px]">
                 <div className="text-white">Last Games</div>
