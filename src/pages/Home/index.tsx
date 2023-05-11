@@ -81,6 +81,12 @@ const Home = () => {
                 setModalOpen(true);
               }}
             />
+            <SmallButton 
+              caption="Go to Betting"
+              onClick={() => {
+                navigate('/betting');
+              }}
+            />
           </div>
           <LeaderBoard />
         </div>
